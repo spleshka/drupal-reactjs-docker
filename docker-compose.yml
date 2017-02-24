@@ -2,25 +2,31 @@ version: '2'
 services:
 
   ##########################
-  ### GIFTS FRONTEND #######
+  ### REACTJS ##############
   ##########################
 
-  fe_gifts:
+  frontend:
     build:
-      context: ./frontend-gifts
+      context: ./reactjs
     environment:
-      VIRTUAL_HOST: gifts.cw2.local
+      VIRTUAL_HOST: example.local
     ports:
      - "3000:3000"
     volumes:
-     - ./frontend-gifts:/app
+     - ./reactjs:/app
      - /app/node_modules
 
   ##########################
-  ### GIFTS BACKEND ########
+  ### DRUPAL ###############
   ##########################
 
-  be_gifts:
+  # Here we use almost out of the box docker4drupal configuration.
+  # So you can refer to their documentation for configuration.
+  # You can add more containers for memcached, redis, varnish, solr, etc
+  # using pre-built docker images.
+  # https://github.com/wodby/docker4drupal/blob/master/docker-compose.yml
+
+  backend_php:
     image: wodby/drupal-php:7.1
     environment:
       PHP_SITE_NAME: dev
@@ -32,10 +38,10 @@ services:
       # PHP_XDEBUG_REMOTE_CONNECT_BACK: 0         # This is needed to respect remote.host setting bellow
       # PHP_XDEBUG_REMOTE_HOST: "10.254.254.254"  # You will also need to 'sudo ifconfig lo0 alias 10.254.254.254'
     volumes:
-      - ./backend-gifts:/var/www/html
+      - ./drupal:/var/www/html
       # - d4d-unison-sync:/var/www/html:rw # Replace volume to this to use docker-sync for macOS users
 
-  be_gifts_mariadb:
+  backend_mariadb:
     image: wodby/drupal-mariadb:1.0.0
     environment:
       MYSQL_RANDOM_ROOT_PASSWORD: 1
@@ -43,78 +49,16 @@ services:
       MYSQL_USER: drupal
       MYSQL_PASSWORD: drupal
 
-  be_gifts_nginx:
+  backend_nginx:
     image: wodby/drupal-nginx:1.10-1.1.0
     environment:
       NGINX_SERVER_NAME: localhost
-      NGINX_UPSTREAM_NAME: be_gifts
+      NGINX_UPSTREAM_NAME: backend_php
       NGINX_DOCROOT: web
       DRUPAL_VERSION: 8
-      VIRTUAL_HOST: gifts.api.cw2.local
+      VIRTUAL_HOST: api.example.local
     volumes_from:
-      - be_gifts
-
-  be_gifts_pma:
-    image: phpmyadmin/phpmyadmin
-    environment:
-      PMA_HOST: be_gifts_mariadb
-      PMA_USER: drupal
-      PMA_PASSWORD: drupal
-      PHP_UPLOAD_MAX_FILESIZE: 1G
-      PHP_MAX_INPUT_VARS: 1G
-    ports:
-     - "8001:80"
-
-
-  ##########################
-  ### DONATIONS BACKEND ####
-  ##########################
-
-  be_donations:
-    image: wodby/drupal-php:7.1
-    environment:
-      PHP_SITE_NAME: dev
-      PHP_HOST_NAME: localhost
-      PHP_DOCROOT: web
-      PHP_SENDMAIL_PATH: /usr/sbin/sendmail -t -i -S mailhog:1025
-      # PHP_XDEBUG_ENABLED: 1
-      # PHP_XDEBUG_AUTOSTART: 1
-      # PHP_XDEBUG_REMOTE_CONNECT_BACK: 0         # This is needed to respect remote.host setting bellow
-      # PHP_XDEBUG_REMOTE_HOST: "10.254.254.254"  # You will also need to 'sudo ifconfig lo0 alias 10.254.254.254'
-    volumes:
-      - ./backend-donations:/var/www/html
-      #- d4d-unison-sync:/var/www/html:rw # Replace volume to this to use docker-sync for macOS users
-
-  be_donations_mariadb:
-    image: wodby/drupal-mariadb:1.0.0
-    environment:
-      MYSQL_RANDOM_ROOT_PASSWORD: 1
-      MYSQL_DATABASE: drupal
-      MYSQL_USER: drupal
-      MYSQL_PASSWORD: drupal
-
-  be_donations_nginx:
-    image: wodby/drupal-nginx:1.10-1.1.0
-    environment:
-      NGINX_SERVER_NAME: localhost
-      NGINX_UPSTREAM_NAME: be_donations
-      NGINX_DOCROOT: web
-      DRUPAL_VERSION: 8
-      VIRTUAL_HOST: donations.api.cw2.local
-    volumes_from:
-      - be_donations
-
-  be_donations_pma:
-    image: phpmyadmin/phpmyadmin
-    environment:
-      PMA_HOST: be_donations_mariadb
-      PMA_USER: drupal
-      PMA_PASSWORD: drupal
-      PHP_UPLOAD_MAX_FILESIZE: 1G
-      PHP_MAX_INPUT_VARS: 1G
-    ports:
-     - "8002:80"
-
+      - backend_php
 
   ##########################
   ### NGINX PROXY ##########
