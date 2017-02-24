@@ -60,9 +60,31 @@ services:
     volumes_from:
       - backend_php
 
+  backend_pma:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: backend_mariadb
+      PMA_USER: drupal
+      PMA_PASSWORD: drupal
+      PHP_UPLOAD_MAX_FILESIZE: 1G
+      PHP_MAX_INPUT_VARS: 1G
+      VIRTUAL_HOST: pma.example.local
+    ports:
+     - "8001:80"
+
+  backend_mailhog:
+    image: mailhog/mailhog
+    environment:
+      VIRTUAL_HOST: emails.example.local
+    ports:
+      - "8002:8025"
+
   ##########################
   ### NGINX PROXY ##########
   ##########################
+
+  # This is the image which provides environment variable
+  # VIRTUAL_HOST and makes possible to use normal host names.
 
   nginx-proxy:
     image: jwilder/nginx-proxy:0.5.0

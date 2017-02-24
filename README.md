@@ -13,6 +13,8 @@
     ```
     127.0.0.1 example.local
     127.0.0.1 api.example.local
+    127.0.0.1 pma.example.local
+    127.0.0.1 emails.example.local
     ```
 
 ## Making changes to Nodejs stack
