@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../drupal-reactjs-docker/.idea/reactjs-drupal.iml" filepath="$PROJECT_DIR$/../drupal-reactjs-docker/.idea/reactjs-drupal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/reactjs-drupal.iml" filepath="$PROJECT_DIR$/.idea/reactjs-drupal.iml" />
     </modules>
   </component>
 </project>
