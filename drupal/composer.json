@@ -1,12 +1,11 @@
 {
-  "name": "systemseed/backend-gifts",
+  "name": "drupal-composer/drupal-project",
   "type": "project",
   "license": "GPL-2.0+",
   "authors": [
     {
-      "name": "Evgeniy Maslovskiy",
-      "email": "spleshka@gmail.com",
-      "role": "Developer"
+      "name": "",
+      "role": ""
     }
   ],
   "repositories": [
