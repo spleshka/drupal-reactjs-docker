@@ -15,7 +15,7 @@ As the result of configuration, you'll get:
 - Docker configuration for Drupal is based on [docker4drupal](http://docker4drupal.org) containers. It provides very good flexibility for Docker-based local development. If you need more containers (i.e. for `memcached`, `redis`, `solr`, etc) - just check out what they offer.
 - Drupal configuration is based on [drupal-composer/drupal-project](https://github.com/drupal-composer/drupal-project) project which provides best dev experience in working with Drupal through `composer`.
 - ReactJS application bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app) - minimal & clean start for ReactJS development.
-- Human readable local host names. No more ugly `localhost:PORT` stuff. Thanks to `https://github.com/jwilder/nginx-proxy`
+- Human readable local host names. No more ugly `localhost:PORT` stuff. Thanks to [https://github.com/jwilder/nginx-proxy](Nginx Proxy) project.
 
 ## Getting started
 
