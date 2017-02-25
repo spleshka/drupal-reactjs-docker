@@ -12,7 +12,7 @@ As the result of configuration, you'll get:
 
 - You don't need to have `composer` on `npm` installed locally. Everything is being done though Docker containers.
 - You don't depend on versions of `composer` or `npm` installed at dev environments of your team members.
-- Docker configuration for Drupal is based on `docker4drupal.org` containers. It provides very good flexibility for developers.
+- Docker configuration for Drupal is based on `docker4drupal.org` containers. It provides very good flexibility for Docker-based local development. If you need more containers (i.e. for `memcached`, `redis`, `solr`, etc) - just check out what they offer.
 - Drupal configuration is based on `https://github.com/drupal-composer/drupal-project` project which provides best dev experience in working with Drupal through `composer`.
 - Human readable local host names. No more ugly `localhost:PORT` stuff. Thanks to `https://github.com/jwilder/nginx-proxy`
 - ReactJS application bootstrapped with `https://github.com/facebookincubator/create-react-app` - minimal & clean start for ReactJS development.
