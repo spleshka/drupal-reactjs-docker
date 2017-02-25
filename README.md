@@ -111,3 +111,5 @@ docker-compose run backend_php composer require drupal/devel:~1.0
 ```
 
 After that commit resulting `composer.json` and `composer.lock` files.
+
+Note that Drush and Drupal Console have to be invoked inside of `web` folder, so you have to `cd web` first.
