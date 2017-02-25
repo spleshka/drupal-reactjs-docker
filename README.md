@@ -17,9 +17,13 @@ As the result of configuration, you'll get:
 - ReactJS application bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app) - minimal & clean start for ReactJS development.
 - Human readable local host names. No more ugly `localhost:PORT` stuff. Thanks to [https://github.com/jwilder/nginx-proxy](Nginx Proxy) project.
 
-## Getting started
+# Dependencies
 
-1. Download this repo to your local environment:
+All you need to have is [Docker](https://docs.docker.com/engine/installation/) and [Docker Compose](https://docs.docker.com/compose/install/) installed. That's it.
+
+# Getting started
+
+1. Download this repo to your local machine:
 
     ```
     git clone git@github.com:spleshka/drupal-reactjs-docker.git
@@ -50,7 +54,9 @@ As the result of configuration, you'll get:
 
     During the process all necessary containers will be downloaded.
     As well as that, `npm install` will be invoked to build ReactJS dependencies inside of Docker image.
-    You DON'T need to have `npm` installed locally. This process may take several minutes.
+    This process may take several minutes.
+    
+    You DON'T need to have `npm` installed locally. 
 
 4. At this point `./drupal` folder is still empty. Let's get it fixed:
 
@@ -58,25 +64,26 @@ As the result of configuration, you'll get:
     docker-compose run backend_php composer create-project drupal-composer/drupal-project:8.x-dev . --stability dev --no-interaction -vvv
     ```
 
-    All we do here is downloading Drupal with its dependencies inside of `backend_php` container.
-    You DON'T need to have `composer` installed locally.
+    All we do here is downloading Drupal with its dependencies using `backend_php` container.
     The installation might take around 5 minutes. No worries, it's expected.
     Please refer to `https://github.com/drupal-composer/drupal-project` for additional info.
+    
+    You DON'T need to have `composer` installed locally.
 
 5. Go ahead and open any host listed in step #2. You're ready to go!
 
 6. As the final step you'd probably want to commit everything to your own repository.
-Feel free to drop `.git` folder in the project root and initialize it with your git settings. 
+    Feel free to drop `.git` folder in the project root and initialize it with your git settings. 
 
-As soon as this is done it's safe to run `git add -A` and commit everything what's been added.
-All files which should be ignored by git already specified in proper `.gitignore` files.
+    As soon as this is done it's safe to run `git add -A` and commit everything what's been added.
+    All files which should be ignored by git already specified in proper `.gitignore` files.
 
 ## Shutting down the environments
 
 It's **IMPORTANT** to stop Docker containers using `docker-compose stop`.
 
-There's a possibility to shut environment using `docker-compose down`, but the it will drop Drupal database.
-You can read a little bit more [here](https://github.com/wodby/docker4drupal/blob/master/CHANGELOG.md#action-required-before-upgrading).
+Of course there's a possibility to shut the Docker containers down using `docker-compose down`, but the it will drop Drupal database.
+You can read a little bit more about it [here](https://github.com/wodby/docker4drupal/blob/master/CHANGELOG.md#action-required-before-upgrading).
 
 ## CLI to work with ReactJS application
 
@@ -104,7 +111,7 @@ docker-compose run backend_php sh
 
 Then run any command you need. It's possible to use `composer`, `drush`, `drupal`.
 
-If you want to run a single command inside of container then you don't have to run shell. Simply do it this way:
+If you want to run a single command inside of the container then you don't have to run shell first. Just do it this way:
 
 ```
 docker-compose run backend_php composer require drupal/devel:~1.0
@@ -112,4 +119,4 @@ docker-compose run backend_php composer require drupal/devel:~1.0
 
 After that commit resulting `composer.json` and `composer.lock` files.
 
-Note that Drush and Drupal Console have to be invoked inside of `web` folder, so you have to `cd web` first.
+Note that Drush and Drupal Console have to be invoked inside of `web` folder, so you'll have to `cd web` first.
