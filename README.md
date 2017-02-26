@@ -97,7 +97,7 @@ docker-compose run frontend sh
 Then use `npm` CLI as usual. For example, add a new package:
 
 ```
-npm install lodash
+npm install lodash --save
 ```
 
 All you'll need to commit is the change to `package.json` file.
