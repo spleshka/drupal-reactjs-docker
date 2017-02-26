@@ -84,7 +84,7 @@ services:
   ##########################
 
   # This is the image which provides environment variable
-  # VIRTUAL_HOST and makes possible to use normal host names.
+  # VIRTUAL_HOST and makes it possible to use normal host names.
 
   nginx-proxy:
     image: jwilder/nginx-proxy:0.5.0

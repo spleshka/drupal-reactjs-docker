@@ -6,7 +6,7 @@ As the result of configuration, you'll get:
 - Working and ready for development ReactJS application running at `http://example.local`
 - Working and ready for development Drupal 8 application running at `http://api.example.local`
 - UI to access Drupal database running at `http://pma.example.local`
-- Access to all emails rerouted from php (apart from emails sent through SMTP) running at `http://emails.example.local`
+- Access to all emails rerouted from php (apart from emails sent through SMTP) running at `http://emails.example.local:8002`
 
 # Advantages of this project
 
