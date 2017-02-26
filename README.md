@@ -1,6 +1,6 @@
 # What is this project for?
 
-It's a really quick start for local development of ReactJS + Drupal 8 applications.
+It's a really quick start for **LOCAL** development of ReactJS + Drupal 8 applications.
 
 As the result of configuration, you'll get:
 - Working and ready for development ReactJS application running at `http://example.local`
