@@ -61,6 +61,7 @@ All you need to have is [Docker](https://docs.docker.com/engine/installation/) a
 4. At this point `./drupal` folder is still empty. Let's get it fixed:
 
     ```
+    rm drupal/.gitkeep
     docker-compose run backend_php composer create-project drupal-composer/drupal-project:8.x-dev . --stability dev --no-interaction -vvv
     ```
 
@@ -82,7 +83,7 @@ All you need to have is [Docker](https://docs.docker.com/engine/installation/) a
 
 It's **IMPORTANT** to stop Docker containers using `docker-compose stop`.
 
-Of course there's a possibility to shut the Docker containers down using `docker-compose down`, but the it will drop Drupal database.
+Of course there's a possibility to shut the Docker containers down using `docker-compose down`, but it will drop Drupal database.
 You can read a little bit more about it [here](https://github.com/wodby/docker4drupal/blob/master/CHANGELOG.md#action-required-before-upgrading).
 
 ## CLI to work with ReactJS application
