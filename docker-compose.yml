@@ -32,7 +32,7 @@ services:
       PHP_SITE_NAME: dev
       PHP_HOST_NAME: localhost
       PHP_DOCROOT: web
-      PHP_SENDMAIL_PATH: /usr/sbin/sendmail -t -i -S mailhog:1025
+      PHP_SENDMAIL_PATH: /usr/sbin/sendmail -t -i -S backend_mailhog:1025
       # PHP_XDEBUG_ENABLED: 1
       # PHP_XDEBUG_AUTOSTART: 1
       # PHP_XDEBUG_REMOTE_CONNECT_BACK: 0         # This is needed to respect remote.host setting bellow
