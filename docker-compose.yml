@@ -6,15 +6,16 @@ services:
   ##########################
 
   frontend:
-    build:
-      context: ./reactjs
+    image: node:7.5.0-alpine
     environment:
       VIRTUAL_HOST: example.local
     ports:
-     - "3000:3000"
+      - "3000:3000"
+    working_dir: /app
     volumes:
-     - ./reactjs:/app
-     - /app/node_modules
+      - ./reactjs:/app
+      - /app/node_modules
+    command: ['npm', 'start']
 
   ##########################
   ### DRUPAL ###############
