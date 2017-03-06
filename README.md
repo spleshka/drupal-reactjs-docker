@@ -71,13 +71,13 @@ All you need to have is [Docker](https://docs.docker.com/engine/installation/) a
 
     You DON'T need to have `composer` installed locally.
 
-5. Go ahead and open any host listed in step #2. You're ready to go!
-
-6. You will want to get all the dependencies for React.js as well:
+5. You will want to get all the dependencies for React.js as well:
 
     ```
     docker-compose run frontend npm install
     ```
+
+6. Go ahead and open any host listed in step #2. You're ready to go!
 
 7. As the final step you'd probably want to commit everything to your own repository.
     Feel free to drop `.git` folder in the project root and initialize it with your git settings. 
