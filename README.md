@@ -34,13 +34,13 @@ All you need to have is [Docker](https://docs.docker.com/engine/installation/) a
     ```
     # Main reactjs app.
     127.0.0.1 example.local
-    
+
     # Drupal backend.
     127.0.0.1 api.example.local
-    
+
     # PhpMyAdmin for UI access to Drupal database.
     127.0.0.1 pma.example.local
-    
+
     # Access all rerouted emails.
     # DOES NOT CAPTURE EMAILS SENT THROUGH SMTP.
     127.0.0.1 emails.example.local
@@ -55,8 +55,8 @@ All you need to have is [Docker](https://docs.docker.com/engine/installation/) a
     During the process all necessary containers will be downloaded.
     As well as that, `npm install` will be invoked to build ReactJS dependencies inside of Docker image.
     This process may take several minutes.
-    
-    You DON'T need to have `npm` installed locally. 
+
+    You DON'T need to have `npm` installed locally.
 
 4. At this point `./drupal` folder is still empty. Let's get it fixed:
 
@@ -68,12 +68,18 @@ All you need to have is [Docker](https://docs.docker.com/engine/installation/) a
     All we do here is downloading Drupal with its dependencies using `backend_php` container.
     The installation might take around 5 minutes. No worries, it's expected.
     Please refer to `https://github.com/drupal-composer/drupal-project` for additional info.
-    
+
     You DON'T need to have `composer` installed locally.
 
 5. Go ahead and open any host listed in step #2. You're ready to go!
 
-6. As the final step you'd probably want to commit everything to your own repository.
+6. You will want to get all the dependencies for React.js as well:
+
+    ```
+    docker-compose run frontend npm install
+    ```
+
+7. As the final step you'd probably want to commit everything to your own repository.
     Feel free to drop `.git` folder in the project root and initialize it with your git settings. 
 
     As soon as this is done it's safe to run `git add -A` and commit everything what's been added.
