@@ -77,7 +77,10 @@ All you need to have is [Docker](https://docs.docker.com/engine/installation/) a
     docker-compose run frontend npm install
     ```
 
-6. Go ahead and open any host listed in step #2. You're ready to go!
+6. Go ahead and open any host listed in step #2 and you're ready to go! For example: [api.example.local](http://api.example.local)
+
+    If you get an error [503 Service Temporarily Unavailable](https://github.com/spleshka/drupal-reactjs-docker/issues/3) run `docker network create proxy-nginx` to create a new network that is required.
+
 
 7. As the final step you'd probably want to commit everything to your own repository.
     Feel free to drop `.git` folder in the project root and initialize it with your git settings. 
