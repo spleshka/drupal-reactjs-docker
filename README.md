@@ -131,3 +131,21 @@ docker-compose run backend_php composer require drupal/devel:~1.0
 After that commit resulting `composer.json` and `composer.lock` files.
 
 Note that Drush and Drupal Console have to be invoked inside of `web` folder, so you'll have to `cd web` first.
+
+Alternatively, you might use the following command to run `drush` or `drupal` CLI outside of Docker container:
+ 
+```
+docker-compose run backend_php drush --root="./web/" <COMMAND>
+```
+
+If this command seems to be too long to type every time, consider adding it to the list of your bash aliases:
+ 
+```
+alias dockerdrush=docker-compose run backend_php drush --root="./web/"
+```
+
+Then you'll be able to do something like this:
+
+```
+dockerdrush cr
+```
