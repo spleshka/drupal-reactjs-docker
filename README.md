@@ -3,10 +3,10 @@
 It's a really quick start for **LOCAL** development of ReactJS + Drupal 8 applications.
 
 As the result of configuration, you'll get:
-- Working and ready for development ReactJS application running at `http://example.local`
-- Working and ready for development Drupal 8 application running at `http://api.example.local`
-- UI to access Drupal database running at `http://pma.example.local`
-- Access to all emails rerouted from php (apart from emails sent through SMTP) running at `http://emails.example.local:8002`
+- Working and ready for development ReactJS application
+- Working and ready for development Drupal 8 application
+- UI to access Drupal database
+- UI to access all emails rerouted from php (apart from emails sent through SMTP)
 
 # Advantages of this project
 
@@ -15,11 +15,25 @@ As the result of configuration, you'll get:
 - Docker configuration for Drupal is based on [docker4drupal](http://docker4drupal.org) containers. It provides very good flexibility for Docker-based local development. If you need more containers (i.e. for `memcached`, `redis`, `solr`, etc) - just check out what they offer.
 - Drupal configuration is based on [drupal-composer/drupal-project](https://github.com/drupal-composer/drupal-project) project which provides best dev experience in working with Drupal through `composer`.
 - ReactJS application bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app) - minimal & clean start for ReactJS development.
-- Human readable local host names. No more ugly `localhost:PORT` stuff. Thanks to [Nginx Proxy](https://github.com/jwilder/nginx-proxy) project.
+- Human readable local host names. No more ugly `localhost:PORT` stuff.
 
 # Dependencies
 
 All you need to have is [Docker](https://docs.docker.com/engine/installation/) and [Docker Compose](https://docs.docker.com/compose/install/) installed. That's it.
+
+# Hosts
+
+At the end of configuration journey you'll get the following hosts available:
+
+| URL                                          | Name                |
+| -------------------------------------------- | ------------------- |
+| http://app.docker.localhost:8000/            | ReactJS application |
+| http://drupal.docker.localhost:8000/         | Drupal 8            |
+| http://pma.drupal.docker.localhost:8000/     | PhpMyAdmin          |
+| http://mailhog.drupal.docker.localhost:8000/ | Mailhog             |
+
+If you want, you can go further and configure `traefik` in `docker-compose.yml` file to get rid of `8000` port.
+As well as that, you can add custom hosts to your `/etc/hosts` file (for example, `127.0.0. 1 app.local`), reconfigure `traefik` to use these hosts in `docker-compose.yml` and eventually get beautiful URLs.
 
 # Getting started
 
@@ -29,61 +43,35 @@ All you need to have is [Docker](https://docs.docker.com/engine/installation/) a
     git clone git@github.com:spleshka/drupal-reactjs-docker.git
     ```
 
-2. Add the following lines to `/etc/hosts` file (or configure it on local DNS server, whatever works better for you):
-
-    ```
-    # Main reactjs app.
-    127.0.0.1 example.local
-
-    # Drupal backend.
-    127.0.0.1 api.example.local
-
-    # PhpMyAdmin for UI access to Drupal database.
-    127.0.0.1 pma.example.local
-
-    # Access all rerouted emails.
-    # DOES NOT CAPTURE EMAILS SENT THROUGH SMTP.
-    127.0.0.1 emails.example.local
-    ```
-
-3. Bootstrap Docker containers listed in `docker-compose.yml` file:
+2. Bootstrap Docker containers listed in `docker-compose.yml` file:
 
     ```
     docker-compose up -d
     ```
 
     During the process all necessary containers will be downloaded.
-    As well as that, `npm install` will be invoked to build ReactJS dependencies inside of Docker image.
-    This process may take several minutes.
-    It means that `http://example.local` will not be reachable until that (you'll see nginx 502 error).
+    As well as that, `npm install` will be invoked to build ReactJS dependencies inside of Docker container.
+    This process may take 1-2 minutes.
+    It means that `http://app.docker.localhost:8000/` will not be reachable until that (you'll see nginx error).
 
     You DON'T need to have `npm` installed locally.
 
-4. At this point `./drupal` folder is still empty. Let's get it fixed:
+3. At this point `./drupal` folder is still empty. Let's get it fixed:
 
     ```
-    rm drupal/.gitkeep
+    sudo rm drupal/.gitkeep
     docker-compose run backend_php composer create-project drupal-composer/drupal-project:8.x-dev . --stability dev --no-interaction -vvv
     ```
 
     All we do here is downloading Drupal with its dependencies using `backend_php` container.
     The installation might take around 5 minutes. No worries, it's expected.
-    Please refer to `https://github.com/drupal-composer/drupal-project` for additional info.
+    Check out [Drupal Project](https://github.com/drupal-composer/drupal-project) for development guideline.
 
     You DON'T need to have `composer` installed locally.
 
-5. You will want to get all the dependencies for React.js as well:
+4. It's all done now! You may try accessing any host listed in the `Hosts` section of this manual. 
 
-    ```
-    docker-compose run frontend npm install
-    ```
-
-6. Go ahead and open any host listed in step #2 and you're ready to go! For example: [api.example.local](http://api.example.local)
-
-    If you get an error [503 Service Temporarily Unavailable](https://github.com/spleshka/drupal-reactjs-docker/issues/3) run `docker network create proxy-nginx` to create a new network that is required.
-
-
-7. As the final step you'd probably want to commit everything to your own repository.
+5. As the final step you'd probably want to commit everything to your own repository.
     Feel free to drop `.git` folder in the project root and initialize it with your git settings. 
 
     As soon as this is done it's safe to run `git add -A` and commit everything what's been added.
