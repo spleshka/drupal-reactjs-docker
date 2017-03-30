@@ -55,6 +55,7 @@ All you need to have is [Docker](https://docs.docker.com/engine/installation/) a
     During the process all necessary containers will be downloaded.
     As well as that, `npm install` will be invoked to build ReactJS dependencies inside of Docker image.
     This process may take several minutes.
+    It means that `http://example.local` will not be reachable until that (you'll see nginx 502 error).
 
     You DON'T need to have `npm` installed locally.
 

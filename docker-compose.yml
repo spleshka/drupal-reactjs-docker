@@ -6,7 +6,7 @@ services:
   ##########################
 
   frontend:
-    image: node:7.5.0-alpine
+    image: node:7-alpine
     environment:
       VIRTUAL_HOST: example.local
     ports:
@@ -14,8 +14,12 @@ services:
     working_dir: /app
     volumes:
       - ./reactjs:/app
+      # By default we tell Docker not to copy files inside of ./node_modules
+      # folder from Docker containers into our host machine due to
+      # possible performance issues. However if you need that, feel free to
+      # drop this line below.
       - /app/node_modules
-    command: ['npm', 'start']
+    command: sh -c 'npm install && npm run start'
 
   ##########################
   ### DRUPAL ###############
