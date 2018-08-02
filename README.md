@@ -1,3 +1,7 @@
+# Newer version is available!
+
+There's a newer version of a boilerplate avaialble at https://github.com/systemseed/drupal_reactjs_boilerplate. It has many more features & server side rendering support.
+
 # What is this project for?
 
 It's a really quick start for **LOCAL** development of ReactJS + Drupal 8 applications.
